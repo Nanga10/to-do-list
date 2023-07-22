@@ -1,7 +1,11 @@
-import { addProjectBtnEl, asideEl } from "./dom_elements";
+import {
+  addProjectBtnEl,
+  asideEl,
+  mainEl,
+  projectNameEl,
+} from "./dom_elements";
 let arrProjects = [];
 
-//Add project form  DOM elements
 const projectItemEl = document.createElement("div");
 const contentEL = document.getElementById("content");
 const overlayEl = document.createElement("div");
@@ -15,11 +19,15 @@ const cancelProjectBtn = document.createElement("button");
 const projectTitleDiv = document.createElement("div");
 const projectDescDiv = document.createElement("div");
 const projectBtnDiv = document.createElement("div");
-const projectTitle = document.createElement("h2");
+const projectTitles = document.createElement("ul");
+
+let projects = document.querySelectorAll("#listItem");
+
+const projectNameEl = document.createElement("h1");
 
 const renderNewProjectForm = () => {
-  asideEl.append(projectItemEl);
   projectItemEl.classList.add("project-item-div");
+  asideEl.appendChild(projectItemEl);
 
   overlayEl.classList.add("overlay");
   contentEL.appendChild(overlayEl);
@@ -61,19 +69,40 @@ cancelProjectBtn.addEventListener("click", () => {
   overlayEl.remove();
 });
 
+const renderProjectTitles = () => {
+  let listItem = document.createElement("div");
+  listItem.setAttribute("id", "project-item");
+
+  for (let i = 0; i < arrProjects.length; i++) {
+    listItem.textContent = arrProjects[i].Name;
+  }
+  projectTitles.append(listItem);
+  projectItemEl.append(projectTitles);
+
+  document.querySelectorAll("#project-item").forEach((div, index) => {
+    div.onclick = () => {
+      // projectNameEl.textContent = arrProjects[index].Name;
+      console.log(arrProjects[index].Name);
+    };
+  });
+};
+
 //Object constructor for a new project
-function Project(Name, Description) {
+function Project(Name, Description, tasks) {
   this.Name = Name;
   this.Description = Description;
+  this.tasks = tasks;
+  tasks = [];
 }
 
-submitProjectBtn.addEventListener("click", () => {
+const addProjectToList = () => {
   const project = new Project(projectTitleInp.value, projectDescInp.value);
-  console.log(project);
   arrProjects.push(project);
-  projectTitle.innerHTML += `${projectTitleInp.value} <br>`;
-  projectItemEl.append(projectTitle);
-  console.log(arrProjects);
+};
+
+submitProjectBtn.addEventListener("click", () => {
+  addProjectToList();
+  renderProjectTitles();
   overlayEl.remove();
   projectTitleInp.value = " ";
   projectDescInp.value = " ";

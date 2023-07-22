@@ -4,6 +4,7 @@ const mainEl = document.createElement("div");
 const addProjectBtnEl = document.createElement("button");
 const addTodoBtnEl = document.createElement("button");
 const projectNameEl = document.createElement("h1");
+contentEl.setAttribute("id", "content");
 
 const renderSkeleton = () => {
   contentEl.setAttribute("id", "content");
@@ -12,7 +13,7 @@ const renderSkeleton = () => {
   addProjectBtnEl.classList.add("site-buttons");
   asideEl.appendChild(addProjectBtnEl);
 
-  projectNameEl.textContent = "PROJECT NAME";
+  projectNameEl.textContent = " ";
   mainEl.appendChild(projectNameEl);
   mainEl.classList.add("main");
   addTodoBtnEl.textContent = "ADD NEW TASK";
@@ -23,4 +24,11 @@ const renderSkeleton = () => {
   contentEl.appendChild(mainEl);
 };
 
-export { renderSkeleton, addProjectBtnEl, addTodoBtnEl, asideEl};
+export {
+  renderSkeleton,
+  addProjectBtnEl,
+  addTodoBtnEl,
+  asideEl,
+  mainEl,
+  projectNameEl,
+};

@@ -78,3 +78,7 @@ body {
 .project-item-div {
   display: flex;
 }
+
+#project-item{
+  border: solid 1px black;
+}
