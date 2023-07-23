@@ -3,7 +3,8 @@ const asideEl = document.createElement("div");
 const mainEl = document.createElement("div");
 const addProjectBtnEl = document.createElement("button");
 const addTodoBtnEl = document.createElement("button");
-const projectNameEl = document.createElement("h1");
+let projectNameEl = document.createElement("h1");
+let projectDescriptionEl = document.createElement("p");
 contentEl.setAttribute("id", "content");
 
 const renderSkeleton = () => {
@@ -15,6 +16,8 @@ const renderSkeleton = () => {
 
   projectNameEl.textContent = " ";
   mainEl.appendChild(projectNameEl);
+  projectDescriptionEl.textContent = " ";
+  mainEl.appendChild(projectDescriptionEl);
   mainEl.classList.add("main");
   addTodoBtnEl.textContent = "ADD NEW TASK";
   addTodoBtnEl.classList.add("site-buttons");
@@ -31,4 +34,5 @@ export {
   asideEl,
   mainEl,
   projectNameEl,
+  projectDescriptionEl,
 };

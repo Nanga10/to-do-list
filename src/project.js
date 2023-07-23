@@ -3,6 +3,8 @@ import {
   asideEl,
   mainEl,
   projectNameEl,
+  projectDescriptionEl,
+  addTodoBtnEl,
 } from "./dom_elements";
 let arrProjects = [];
 
@@ -22,8 +24,6 @@ const projectBtnDiv = document.createElement("div");
 const projectTitles = document.createElement("ul");
 
 let projects = document.querySelectorAll("#listItem");
-
-const projectNameEl = document.createElement("h1");
 
 const renderNewProjectForm = () => {
   projectItemEl.classList.add("project-item-div");
@@ -81,8 +81,9 @@ const renderProjectTitles = () => {
 
   document.querySelectorAll("#project-item").forEach((div, index) => {
     div.onclick = () => {
-      // projectNameEl.textContent = arrProjects[index].Name;
-      console.log(arrProjects[index].Name);
+      projectNameEl.textContent = arrProjects[index].Name;
+      projectDescriptionEl.textContent = arrProjects[index].Description;
+      // console.log(arrProjects[index].Name);
     };
   });
 };
@@ -100,12 +101,62 @@ const addProjectToList = () => {
   arrProjects.push(project);
 };
 
+const addTask = () => {
+  //add task to a project
+};
+
 submitProjectBtn.addEventListener("click", () => {
   addProjectToList();
   renderProjectTitles();
   overlayEl.remove();
   projectTitleInp.value = " ";
   projectDescInp.value = " ";
+});
+
+const taskForm = document.createElement("div");
+const taskTitlelbl = document.createElement("label");
+const taskTitleinp = document.createElement("input");
+const taskDesclbl = document.createElement("label");
+const taskDescinp = document.createElement("input");
+const taskDuelbl = document.createElement("label");
+const taskDueinp = document.createElement("input");
+const taskPrioritylbl = document.createElement("label");
+const taskPriorityinp = document.createElement("input");
+const taskBtnDiv = document.createElement("div");
+const taskBtnSubmit = document.createElement("button");
+const taskBtnCancel = document.createElement("button");
+
+addTodoBtnEl.addEventListener("click", () => {
+  overlayEl.classList.add("overlay");
+  contentEL.appendChild(overlayEl);
+  taskForm.setAttribute("id", "add-project-div");
+  overlayEl.appendChild(taskForm);
+
+  taskTitlelbl.textContent = "Task Title";
+  taskForm.appendChild(taskTitlelbl);
+  taskForm.appendChild(taskTitleinp);
+
+  taskDesclbl.textContent = "Task Description";
+  taskForm.appendChild(taskDesclbl);
+  taskForm.appendChild(taskDescinp);
+
+  taskDuelbl.textContent = "Task Due Date";
+  taskForm.appendChild(taskDuelbl);
+  taskForm.appendChild(taskDueinp);
+
+  taskPrioritylbl.textContent = "Task Priority";
+  taskForm.appendChild(taskPrioritylbl);
+  taskForm.appendChild(taskPriorityinp);
+
+  taskForm.appendChild(taskBtnDiv);
+  taskBtnDiv.appendChild(taskBtnSubmit);
+  taskBtnSubmit.classList.add("submitButton");
+  taskBtnSubmit.textContent = "Submit";
+
+  taskForm.appendChild(taskBtnDiv);
+  taskBtnDiv.appendChild(taskBtnCancel);
+  taskBtnCancel.classList.add("cancelButton");
+  taskBtnCancel.textContent = "Cancel";
 });
 
 export { createNewProject };
