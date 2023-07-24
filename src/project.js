@@ -91,18 +91,37 @@ const renderProjectTitles = () => {
       renderToDo();
     };
     taskBtnSubmit.onclick = () => {
+      const todo = new ToDo(
+        taskTitleinp.value,
+        taskDescinp.value,
+        taskDueinp.value,
+        taskPriorityinp.value
+      );
+      arrProjects[index].tasks.push(todo);
       console.log(arrProjects[index].Name);
+      console.log(arrProjects[index].tasks);
+      overlayElForm.remove();
+      taskTitleinp.value = " ";
+      taskDescinp.value = " ";
+      taskDueinp.value = " ";
+      taskPriorityinp.value = "";
     };
   });
 };
 
 //Object constructor for a new project
-function Project(Name, Description, tasks) {
+function Project(Name, Description, tasks = []) {
   this.Name = Name;
   this.Description = Description;
   this.tasks = tasks;
-  tasks = [];
   this.active = false;
+}
+
+function ToDo(Title, Description, Duedate, Priority) {
+  this.Title = Title;
+  this.Description = Description;
+  this.Duedate = Duedate;
+  this.Priority = Priority;
 }
 
 const addProjectToList = () => {
