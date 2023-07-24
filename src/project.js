@@ -85,6 +85,14 @@ const renderProjectTitles = () => {
       projectDescriptionEl.textContent = arrProjects[index].Description;
       // console.log(arrProjects[index].Name);
     };
+    addTodoBtnEl.onclick = () => {
+      arrProjects[index].active = true;
+      console.log(arrProjects[index].active);
+      renderToDo();
+    };
+    taskBtnSubmit.onclick = () => {
+      console.log(arrProjects[index].Name);
+    };
   });
 };
 
@@ -94,15 +102,12 @@ function Project(Name, Description, tasks) {
   this.Description = Description;
   this.tasks = tasks;
   tasks = [];
+  this.active = false;
 }
 
 const addProjectToList = () => {
   const project = new Project(projectTitleInp.value, projectDescInp.value);
   arrProjects.push(project);
-};
-
-const addTask = () => {
-  //add task to a project
 };
 
 submitProjectBtn.addEventListener("click", () => {
@@ -125,29 +130,43 @@ const taskPriorityinp = document.createElement("input");
 const taskBtnDiv = document.createElement("div");
 const taskBtnSubmit = document.createElement("button");
 const taskBtnCancel = document.createElement("button");
+const overlayElForm = document.createElement("div");
+const taskTitleDiv = document.createElement("div");
+const taskDescDiv = document.createElement("div");
+const taskDateDiv = document.createElement("div");
+const taskPriorityDiv = document.createElement("div");
 
-addTodoBtnEl.addEventListener("click", () => {
-  overlayEl.classList.add("overlay");
-  contentEL.appendChild(overlayEl);
+const renderToDo = () => {
+  overlayElForm.classList.add("overlay");
+  contentEL.appendChild(overlayElForm);
   taskForm.setAttribute("id", "add-project-div");
-  overlayEl.appendChild(taskForm);
+  overlayElForm.appendChild(taskForm);
 
+  taskTitleDiv.classList.add("form-div");
+  taskForm.appendChild(taskTitleDiv);
   taskTitlelbl.textContent = "Task Title";
-  taskForm.appendChild(taskTitlelbl);
-  taskForm.appendChild(taskTitleinp);
+  taskTitleDiv.appendChild(taskTitlelbl);
+  taskTitleDiv.appendChild(taskTitleinp);
 
+  taskDescDiv.classList.add("form-div");
+  taskForm.appendChild(taskDescDiv);
   taskDesclbl.textContent = "Task Description";
-  taskForm.appendChild(taskDesclbl);
-  taskForm.appendChild(taskDescinp);
+  taskDescDiv.appendChild(taskDesclbl);
+  taskDescDiv.appendChild(taskDescinp);
 
+  taskDateDiv.classList.add("form-div");
+  taskForm.appendChild(taskDateDiv);
   taskDuelbl.textContent = "Task Due Date";
-  taskForm.appendChild(taskDuelbl);
-  taskForm.appendChild(taskDueinp);
+  taskDateDiv.appendChild(taskDuelbl);
+  taskDateDiv.appendChild(taskDueinp);
 
+  taskPriorityDiv.classList.add("form-div");
+  taskForm.appendChild(taskPriorityDiv);
   taskPrioritylbl.textContent = "Task Priority";
-  taskForm.appendChild(taskPrioritylbl);
-  taskForm.appendChild(taskPriorityinp);
+  taskPriorityDiv.appendChild(taskPrioritylbl);
+  taskPriorityDiv.appendChild(taskPriorityinp);
 
+  taskBtnDiv.classList.add("form-div");
   taskForm.appendChild(taskBtnDiv);
   taskBtnDiv.appendChild(taskBtnSubmit);
   taskBtnSubmit.classList.add("submitButton");
@@ -157,6 +176,10 @@ addTodoBtnEl.addEventListener("click", () => {
   taskBtnDiv.appendChild(taskBtnCancel);
   taskBtnCancel.classList.add("cancelButton");
   taskBtnCancel.textContent = "Cancel";
+};
+
+taskBtnCancel.addEventListener("click", () => {
+  overlayElForm.remove();
 });
 
 export { createNewProject };
